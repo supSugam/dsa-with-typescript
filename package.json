@@ -1,0 +1,37 @@
+{
+  "name": "dsa-with-typescript",
+  "version": "1.0.0",
+  "description": "DSA Warmup with TypeScript.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --loader ts-node/esm src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supSugam/dsa-with-typescript.git"
+  },
+  "keywords": [
+    "typescript",
+    "dsa",
+    "javascript",
+    "leetcode",
+    "problem-solving",
+    "data-structures",
+    "algorithms"
+  ],
+  "author": "Sugam Subedi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supSugam/dsa-with-typescript/issues"
+  },
+  "homepage": "https://github.com/supSugam/dsa-with-typescript#readme",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}
