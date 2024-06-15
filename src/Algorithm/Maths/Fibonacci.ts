@@ -3,6 +3,7 @@ export interface IFibonacci {
   memoization(n: number): number;
   matrix(n: number): number;
   recursive(n: number): number;
+  series(n: number): number[];
 }
 
 export class Fibonacci implements IFibonacci {
@@ -43,7 +44,7 @@ export class Fibonacci implements IFibonacci {
    * @returns The n-th Fibonacci number.
    */
   public memoization(n: number): number {
-    if (n <= 1) return n;
+    if (n <= 1) return Math.max(n, 0);
     if (this.memo[n] !== undefined) return this.memo[n];
 
     this.memo[n] = this.memoization(n - 1) + this.memoization(n - 2);
@@ -58,6 +59,13 @@ export class Fibonacci implements IFibonacci {
    * @returns The product of the two matrices.
    */
   private multiplyMatrices(a: number[][], b: number[][]): number[][] {
+    if (
+      a.length !== 2 ||
+      a[0].length !== 2 ||
+      b.length !== 2 ||
+      b[0].length !== 2
+    )
+      throw new Error('Invalid matrix dimensions');
     return [
       [
         a[0][0] * b[0][0] + a[0][1] * b[1][0],
@@ -118,7 +126,24 @@ export class Fibonacci implements IFibonacci {
    */
 
   public recursive(n: number): number {
-    if (n <= 1) return n;
-    return this.recursive(n - 1) + this.recursive(n - 2);
+    return n <= 0
+      ? 0
+      : n === 1
+      ? 1
+      : this.recursive(n - 1) + this.recursive(n - 2);
+  }
+
+  /**
+   * Generate the Fibonacci series up to the n-th number.
+   *
+   * @param n - The position in the Fibonacci sequence.
+   * @returns The Fibonacci series up to the n-th number.
+   */
+  public series(n: number): number[] {
+    const series: number[] = [0, 1];
+    for (let i = 2; i < n; i++) {
+      series.push(series[i - 1] + series[i - 2]);
+    }
+    return series;
   }
 }
