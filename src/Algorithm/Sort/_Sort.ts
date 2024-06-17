@@ -51,7 +51,6 @@ export class Sort {
   }
 
   /**
-   * Quick sort
    * Time complexity: O(n log n) - Log-linear time due to partitioning the array into halves.
    * Space complexity: O(log n) - Logarithmic space due to recursive calls.
    * @param arr - The array to be sorted.
@@ -92,5 +91,35 @@ export class Sort {
       [pivot],
       Sort.quickSort(right as ArrayToSort, pivotPosition)
     ) as T;
+  }
+
+  /**
+   * Merge sort
+   * Time complexity: O(n log n) - Log-linear time due to partitioning the array into halves.
+   * Space complexity: O(n) - Linear space due to creating new arrays.
+   * @param arr - The array to be sorted.
+   * @returns The sorted array.
+   * @example
+   * Sort.mergeSort([5, 4, 1, 2, 3]); // [1, 2, 3, 4, 5]
+   */
+
+  static mergeSort<T extends ArrayToSort>(arr: T): T {
+    if (arr.length <= 1) return arr;
+    const middle = Math.floor(arr.length / 2);
+    const left = arr.slice(0, middle) as T;
+    const right = arr.slice(middle) as T;
+    return this.merge(this.mergeSort(left), this.mergeSort(right)) as T;
+  }
+
+  private static merge<T extends ArrayToSort>(left: T, right: T): T {
+    const sorted = [];
+    while (left.length && right.length) {
+      if (left[0] <= right[0]) {
+        sorted.push(left.shift());
+      } else {
+        sorted.push(right.shift());
+      }
+    }
+    return sorted.concat(left, right) as T;
   }
 }

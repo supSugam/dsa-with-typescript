@@ -60,4 +60,25 @@ export class Maths {
     }
     return true;
   }
+
+  /**
+   * Get Cartesian product of arrays.
+   * Time complexity: O(n^2) - Quadratic time due to nested loops through n iterations.
+   * Space complexity: O(n) - Linear space as extra space used proportional to input size.
+   * @param arrays - The arrays to get the Cartesian product of.
+   * @returns The Cartesian product of the arrays.
+   * @example
+   * Maths.cartesianProduct([[1, 2], [3, 4], [5, 6]]); // [[1, 3, 5], [1, 3, 6], [1, 4, 5], [1, 4, 6], [2, 3, 5], [2, 3, 6], [2, 4, 5], [2, 4, 6]]
+   */
+  static cartesianProduct<T extends Array<Array<unknown>>>(arrays: T) {
+    return arrays.reduce(
+      (pre, curr, i) => {
+        console.log(pre, curr, i);
+        return pre.flatMap((preEl) =>
+          curr.map((currEl) => [preEl, currEl].flat())
+        );
+      },
+      [[]]
+    );
+  }
 }
