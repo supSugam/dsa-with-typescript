@@ -115,9 +115,11 @@ export class Sort {
     const sorted = [];
     while (left.length && right.length) {
       if (left[0] <= right[0]) {
-        sorted.push(left.shift());
+        const shift = left.shift();
+        if (shift) sorted.push(shift);
       } else {
-        sorted.push(right.shift());
+        const shift = right.shift();
+        if (shift) sorted.push(shift);
       }
     }
     return sorted.concat(left, right) as T;

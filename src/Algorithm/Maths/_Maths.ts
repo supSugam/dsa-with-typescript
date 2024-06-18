@@ -37,7 +37,7 @@ export class Maths {
    */
 
   static isComposite(n: number): boolean {
-    return !Maths.isPrime(n);
+    return !this.isPrime(n);
   }
 
   /**
@@ -73,12 +73,29 @@ export class Maths {
   static cartesianProduct<T extends Array<Array<unknown>>>(arrays: T) {
     return arrays.reduce(
       (pre, curr, i) => {
-        console.log(pre, curr, i);
         return pre.flatMap((preEl) =>
           curr.map((currEl) => [preEl, currEl].flat())
         );
       },
       [[]]
     );
+  }
+
+  /**
+   * Get number of distinct ways to climb a staircase.
+   * Time complexity: O(2^n) - Exponential time due to recursive calls through n iterations.
+   * Space complexity: O(n) - Linear space due to recursive calls.
+   * @param n - The number of steps in the staircase.
+   * @param maxStepsAtATime - The maximum number of steps that can be taken at a time.
+   * @returns The number of distinct ways to climb the staircase.
+   * @example Maths.climbStaircase(5); // 8
+   */
+  static climbStaircase(n: number, maxStepsAtATime: number = 2): number {
+    if (n <= 1) return 1;
+    let sum = 0;
+    for (let i = 1; i <= maxStepsAtATime; i++) {
+      sum += this.climbStaircase(n - i, maxStepsAtATime);
+    }
+    return sum;
   }
 }
